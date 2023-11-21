@@ -35,16 +35,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             {
                 case 0:
                 {
-                    ShowPlayerDialog(playerid, DIALOG_NOTE_CREATE_NAME, DIALOG_STYLE_INPUT, "Создание записки", "Укажите название записки", "Далее", "Отмена");
+                    ShowPlayerDialog(playerid, DIALOG_NOTE_CREATE_NAME, DIALOG_STYLE_INPUT, "РЎРѕР·РґР°РЅРёРµ Р·Р°РїРёСЃРєРё", "РЈРєР°Р¶РёС‚Рµ РЅР°Р·РІР°РЅРёРµ Р·Р°РїРёСЃРєРё", "Р”Р°Р»РµРµ", "РћС‚РјРµРЅР°");
                 }
                 case 1:
                 {
 
                     new string[40]; 
-                    format(string, sizeof(string), "Автор записки: %s", g_note_data[g_player_note_data[playerid][N_ID]][N_NAME]);
+                    format(string, sizeof(string), "РђРІС‚РѕСЂ Р·Р°РїРёСЃРєРё: %s", g_note_data[g_player_note_data[playerid][N_ID]][N_NAME]);
 
                     SendClientMessageEx(playerid, -1, string);
-                    ShowPlayerDialog(playerid, DIALOG_NOTE_READ, DIALOG_STYLE_MSGBOX, g_note_data[g_player_note_data[playerid][N_ID]][N_NAME], g_note_data[g_player_note_data[playerid][N_ID]][N_TEXT], "Закрыть", "");
+                    ShowPlayerDialog(playerid, DIALOG_NOTE_READ, DIALOG_STYLE_MSGBOX, g_note_data[g_player_note_data[playerid][N_ID]][N_NAME], g_note_data[g_player_note_data[playerid][N_ID]][N_TEXT], "Р—Р°РєСЂС‹С‚СЊ", "");
                 }
                 case 2:
                 {
@@ -59,7 +59,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                             g_note_data[note_id][N_POSITION_Z]
                         );
 
-                        g_note_data[g_player_note_data[playerid][N_ID]][N_LABEL] = Create3DTextLabel("Записка. Чтобы поднять нажмите \"K. ALT\"", -1, g_note_data[g_player_note_data[playerid][N_ID]][N_POSITION_X], g_note_data[g_player_note_data[playerid][N_ID]][N_POSITION_Y], g_note_data[g_player_note_data[playerid][N_ID]][N_POSITION_Z], 5.0, -1, -1);
+                        g_note_data[g_player_note_data[playerid][N_ID]][N_LABEL] = Create3DTextLabel("Р—Р°РїРёСЃРєР°. Р§С‚РѕР±С‹ РїРѕРґРЅСЏС‚СЊ РЅР°Р¶РјРёС‚Рµ \"K. ALT\"", -1, g_note_data[g_player_note_data[playerid][N_ID]][N_POSITION_X], g_note_data[g_player_note_data[playerid][N_ID]][N_POSITION_Y], g_note_data[g_player_note_data[playerid][N_ID]][N_POSITION_Z], 5.0, -1, -1);
                     }
                 }
                 case 3:
@@ -80,7 +80,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                             }
 
                             Delete3DTextLabel(g_note_data[note_id][N_LABEL]);
-                            ShowPlayerDialog(playerid, DIALOG_NOTE_NULL, DIALOG_STYLE_MSGBOX, g_note_data[note_id][N_NAME], g_note_data[note_id][N_TEXT], "Закрыть", "");
+                            ShowPlayerDialog(playerid, DIALOG_NOTE_NULL, DIALOG_STYLE_MSGBOX, g_note_data[note_id][N_NAME], g_note_data[note_id][N_TEXT], "Р—Р°РєСЂС‹С‚СЊ", "");
                             
                             break;
                         }
@@ -98,7 +98,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 return false;
             }
 
-            return NoteSystem:CreateNote(playerid, inputtext); // Создаем записку
+            return NoteSystem:CreateNote(playerid, inputtext); // РЎРѕР·РґР°РµРј Р·Р°РїРёСЃРєСѓ
         }
 
         case DIALOG_NOTE_CREATE_TEXT:
@@ -108,7 +108,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 return false;
             }
 
-            ShowPlayerDialog(playerid, DIALOG_NOTE_SET_AUTHOR, DIALOG_STYLE_INPUT, "Создание записки", "Укажите имя автора. Вы можете его не использовать, и имя будет \"Неизвестно\"", "Далее", "Отмена");
+            ShowPlayerDialog(playerid, DIALOG_NOTE_SET_AUTHOR, DIALOG_STYLE_INPUT, "РЎРѕР·РґР°РЅРёРµ Р·Р°РїРёСЃРєРё", "РЈРєР°Р¶РёС‚Рµ РёРјСЏ Р°РІС‚РѕСЂР°. Р’С‹ РјРѕР¶РµС‚Рµ РµРіРѕ РЅРµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ, Рё РёРјСЏ Р±СѓРґРµС‚ \"РќРµРёР·РІРµСЃС‚РЅРѕ\"", "Р”Р°Р»РµРµ", "РћС‚РјРµРЅР°");
             return NoteSystem:SetNoteText(g_player_note_data[playerid][N_ID], inputtext, strlen(inputtext));
         }
 
@@ -119,7 +119,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 return NoteSystem:SetNoteAuthor(g_player_note_data[playerid][N_ID], _, strlen(inputtext));
             }
 
-            SendClientMessage(playerid, -1, "Записка создана");
+            SendClientMessage(playerid, -1, "Р—Р°РїРёСЃРєР° СЃРѕР·РґР°РЅР°");
             return NoteSystem:SetNoteAuthor(g_player_note_data[playerid][N_ID], inputtext, strlen(inputtext));
         }
     }
@@ -168,7 +168,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
     {
         if(g_player_note_data[playerid][N_ID] == -1)
         {
-            return ShowPlayerDialog(playerid, DIALOG_NOTE_CREATE_NAME, DIALOG_STYLE_INPUT, "Создание записки", "Укажите название записки", "Далее", "Отмена");
+            return ShowPlayerDialog(playerid, DIALOG_NOTE_CREATE_NAME, DIALOG_STYLE_INPUT, "РЎРѕР·РґР°РЅРёРµ Р·Р°РїРёСЃРєРё", "РЈРєР°Р¶РёС‚Рµ РЅР°Р·РІР°РЅРёРµ Р·Р°РїРёСЃРєРё", "Р”Р°Р»РµРµ", "РћС‚РјРµРЅР°");
         }
         else
         {
