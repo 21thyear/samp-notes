@@ -58,7 +58,7 @@ stock NoteSystem:init()
 	#if defined NoteSystemVaribles && defined NoteSystemPublics
 		#define NoteSystemInitialized
 	#else
-		return printf("[Note System] Необходимые компоненты не обнаружены. Загрузка невозможна!");
+		return printf("[Note System] РќРµРѕР±С…РѕРґРёРјС‹Рµ РєРѕРјРїРѕРЅРµРЅС‚С‹ РЅРµ РѕР±РЅР°СЂСѓР¶РµРЅС‹. Р—Р°РіСЂСѓР·РєР° РЅРµРІРѕР·РјРѕР¶РЅР°!");
 	#endif
 
 	for(new i; i < MAX_NOTES; i++)
@@ -73,10 +73,10 @@ stock NoteSystem:init()
 	    g_note_data[i][N_POSITION_Z] = -1.0;
 	}
 
-	return printf("[Note System] Необходимые компоненты были обнаружены. Загрузка завершена!");
+	return printf("[Note System] РќРµРѕР±С…РѕРґРёРјС‹Рµ РєРѕРјРїРѕРЅРµРЅС‚С‹ Р±С‹Р»Рё РѕР±РЅР°СЂСѓР¶РµРЅС‹. Р—Р°РіСЂСѓР·РєР° Р·Р°РІРµСЂС€РµРЅР°!");
 }
 
-stock NoteSystem:SetNoteAuthor(const note_id, const author[] = "Неизвестно", const author_len )
+stock NoteSystem:SetNoteAuthor(const note_id, const author[] = "РќРµРёР·РІРµСЃС‚РЅРѕ", const author_len )
 {
 	if(!NoteSystemIsValidNote(note_id))
 		return INVALID_NOTE_ID;
@@ -84,7 +84,7 @@ stock NoteSystem:SetNoteAuthor(const note_id, const author[] = "Неизвестно", con
 	return format(g_note_data[note_id][N_AUTHOR], author_len, "%s", author);
 }
 
-stock NoteSystem:SetNoteName(const note_id, const name[] = "Записка", const note_len)
+stock NoteSystem:SetNoteName(const note_id, const name[] = "Р—Р°РїРёСЃРєР°", const note_len)
 {
 	if(!NoteSystemIsValidNote(note_id))
 		return INVALID_NOTE_ID;
@@ -100,19 +100,19 @@ stock NoteSystem:SetNoteText(const note_id, const note_text[], const note_len )
 	return format(g_note_data[note_id][N_TEXT], note_len, "%s", note_text);
 }
 
-stock NoteSystem:CreateNote(playerid, const note_name[] = "Записка")
+stock NoteSystem:CreateNote(playerid, const note_name[] = "Р—Р°РїРёСЃРєР°")
 {
 	if(Iter_Count(g_notes_created) > MAX_NOTES)
 		return INVALID_NOTE_ID;
 	if(!IsPlayerConnected(playerid))
 		return INVALID_PLAYER_ID;
 
-	Iter_Add(g_notes_created, Iter_Count(g_notes_created)++); // Добавление нового значению для итератора
+	Iter_Add(g_notes_created, Iter_Count(g_notes_created)++); // Р”РѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕРіРѕ Р·РЅР°С‡РµРЅРёСЋ РґР»СЏ РёС‚РµСЂР°С‚РѕСЂР°
 
 	new note_id = Iter_Count(g_notes_created);
 	g_player_note_data[playerid][N_ID] = note_id;
 
-	return ShowPlayerDialog(playerid, DIALOG_NOTE_CREATE_TEXT, DIALOG_STYLE_INPUT, "Создание записки", "Укажите пожалуйста содержание записки", "Далее", "Отмена");
+	return ShowPlayerDialog(playerid, DIALOG_NOTE_CREATE_TEXT, DIALOG_STYLE_INPUT, "РЎРѕР·РґР°РЅРёРµ Р·Р°РїРёСЃРєРё", "РЈРєР°Р¶РёС‚Рµ РїРѕР¶Р°Р»СѓР№СЃС‚Р° СЃРѕРґРµСЂР¶Р°РЅРёРµ Р·Р°РїРёСЃРєРё", "Р”Р°Р»РµРµ", "РћС‚РјРµРЅР°");
 }
 
 stock NoteSystem:ShowNote(playerid, const note_id)
@@ -122,5 +122,5 @@ stock NoteSystem:ShowNote(playerid, const note_id)
 	if(!IsPlayerConnected(playerid))
 		return INVALID_PLAYER_ID;
 
-	return ShowPlayerDialog(playerid, DIALOG_NOTE, DIALOG_STYLE_LIST, "Взаимодействие с запиской", "1. Написать записку\n2. Прочитать записку\n3. Бросить на землю\n4. Поднять с земли", "Выбрать", "Отмена");
+	return ShowPlayerDialog(playerid, DIALOG_NOTE, DIALOG_STYLE_LIST, "Р’Р·Р°РёРјРѕРґРµР№СЃС‚РІРёРµ СЃ Р·Р°РїРёСЃРєРѕР№", "1. РќР°РїРёСЃР°С‚СЊ Р·Р°РїРёСЃРєСѓ\n2. РџСЂРѕС‡РёС‚Р°С‚СЊ Р·Р°РїРёСЃРєСѓ\n3. Р‘СЂРѕСЃРёС‚СЊ РЅР° Р·РµРјР»СЋ\n4. РџРѕРґРЅСЏС‚СЊ СЃ Р·РµРјР»Рё", "Р’С‹Р±СЂР°С‚СЊ", "РћС‚РјРµРЅР°");
 }
