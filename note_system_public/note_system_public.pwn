@@ -11,11 +11,7 @@ public: bool:NoteSystemIsValidNote(const note_id)
         {
             continue;
         }
-
-        else
-        {
-            return true;
-        }
+        return true;   
     }
     return false;
 }
